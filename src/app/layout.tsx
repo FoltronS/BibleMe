@@ -27,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={`${playfair.variable} ${lora.variable} h-full`}>
-      <body className="min-h-full bg-cream text-charcoal font-sans antialiased">
+    <html className={`${playfair.variable} ${lora.variable} h-full`} suppressHydrationWarning>
+      <body className="min-h-full bg-cream text-charcoal font-sans antialiased" suppressHydrationWarning>
         {children}
       </body>
     </html>

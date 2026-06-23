@@ -55,7 +55,6 @@ export default function OnboardingPage() {
               onChange={(e) => setNickname(e.target.value)}
               placeholder={t('step1Placeholder')}
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
-              autoFocus
               className="w-full bg-white border border-soft-gold/30 rounded-xl px-4 py-3 text-charcoal placeholder:text-warm-gray/70 focus:outline-none focus:ring-2 focus:ring-soft-gold/40 text-sm"
             />
             <button

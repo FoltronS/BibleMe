@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useUser } from '@/context/user-context';
 import { SettingsPanel } from '@/components/settings/SettingsPanel';
@@ -14,7 +14,12 @@ function formatDate(locale: string): string {
 
 export function AppHeader() {
   const [showSettings, setShowSettings] = useState(false);
+  const [dateStr, setDateStr] = useState('');
   const { nickname, locale } = useUser();
+
+  useEffect(() => {
+    setDateStr(formatDate(locale));
+  }, [locale]);
   const t = useTranslations('nav');
 
   return (
@@ -37,7 +42,7 @@ export function AppHeader() {
 
         {/* Right: date + settings (settings icon hidden on desktop — sidebar has it) */}
         <div className="flex items-center gap-3">
-          <span className="text-charcoal/60 text-xs">{formatDate(locale)}</span>
+          <span className="text-charcoal/60 text-xs">{dateStr}</span>
           <button
             onClick={() => setShowSettings(true)}
             className="rounded-full p-2 text-warm-gray hover:bg-ivory transition-colors md:hidden"
