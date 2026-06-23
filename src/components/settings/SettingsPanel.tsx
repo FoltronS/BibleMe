@@ -20,8 +20,6 @@ export function SettingsPanel({ onClose }: { onClose: () => void }) {
   const [localNickname, setLocalNickname] = useState(nickname);
   const [localStruggle, setLocalStruggle] = useState(struggle);
   const [localSpeed, setLocalSpeed] = useState(ttsSpeed);
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
-
   function handleSave() {
     updateProfile({
       nickname: localNickname,
@@ -37,11 +35,7 @@ export function SettingsPanel({ onClose }: { onClose: () => void }) {
   }
 
   function handleReset() {
-    if (showResetConfirm) {
-      resetAll();
-    } else {
-      setShowResetConfirm(true);
-    }
+    resetAll();
   }
 
   return (
@@ -134,7 +128,7 @@ export function SettingsPanel({ onClose }: { onClose: () => void }) {
           onClick={handleReset}
           className="w-full text-center text-sm text-warm-gray hover:text-rose-dark transition-colors py-2"
         >
-          {showResetConfirm ? t('resetConfirm') : t('reset')}
+          {t('reset')}
         </button>
       </div>
     </div>
