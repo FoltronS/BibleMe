@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { usePathname } from '@/i18n/navigation';
 import { useUser } from '@/context/user-context';
 import { SettingsPanel } from '@/components/settings/SettingsPanel';
 
@@ -16,6 +17,8 @@ export function AppHeader() {
   const [showSettings, setShowSettings] = useState(false);
   const [dateStr, setDateStr] = useState('');
   const { nickname, locale } = useUser();
+  const pathname = usePathname();
+  const isOnboarding = pathname.includes('onboarding');
 
   useEffect(() => {
     setDateStr(formatDate(locale));
@@ -43,7 +46,7 @@ export function AppHeader() {
         {/* Right: date + settings (settings icon hidden on desktop — sidebar has it) */}
         <div className="flex items-center gap-3">
           <span className="text-charcoal/60 text-xs">{dateStr}</span>
-          <button
+          {!isOnboarding && <button
             onClick={() => setShowSettings(true)}
             className="rounded-full p-2 text-warm-gray hover:bg-ivory transition-colors md:hidden"
             aria-label="Settings"
@@ -52,7 +55,7 @@ export function AppHeader() {
               <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
-          </button>
+          </button>}
         </div>
       </header>
       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}

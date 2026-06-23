@@ -13,6 +13,7 @@ export function Sidebar() {
 
   const isHome = pathname === '/' || pathname === '';
   const isChat = pathname === '/chat';
+  const isOnboarding = pathname.includes('onboarding');
 
   return (
     <>
@@ -65,7 +66,7 @@ export function Sidebar() {
         </nav>
 
         {/* Settings at bottom */}
-        <button
+        {!isOnboarding && <button
           onClick={() => setShowSettings(true)}
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-warm-gray hover:bg-soft-gold/10 hover:text-charcoal transition-colors"
         >
@@ -75,7 +76,7 @@ export function Sidebar() {
             <circle cx="12" cy="12" r="3" />
           </svg>
           {ts('title')}
-        </button>
+        </button>}
       </aside>
 
       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}
